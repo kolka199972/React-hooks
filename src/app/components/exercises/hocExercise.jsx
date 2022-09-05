@@ -1,5 +1,7 @@
 import React from 'react'
 import CollapseWrapper from '../common/collapse'
+import CardWrapper from '../common/Card'
+import PropTypes from 'prop-types'
 
 const HocExercise = () => {
   return (
@@ -69,8 +71,47 @@ const HocExercise = () => {
         кнопка в компоненте <code>SimpleComponent</code> обновится после
         перезагрузки страницы
       </p>
+      <ComponentWithHoc />
     </CollapseWrapper>
   )
 }
+
+const SimpleComponent = ({onLogin, onLogout, isAuth}) => {
+  return (
+    <div>
+      {!isAuth ? (
+        <button onClick={onLogin}>Войти</button>
+      ) : (
+        <button onClick={onLogout}>Выйти из системы</button>
+      )}
+    </div>
+  )
+}
+
+SimpleComponent.propTypes = {
+  onLogin: PropTypes.func,
+  onLogout: PropTypes.func,
+  isAuth: PropTypes.bool
+}
+
+const withFunctions = (Component) => (props) => {
+  const isAuth = localStorage.getItem('auth') === 'token'
+  console.log(isAuth)
+
+  const onLogin = () => localStorage.setItem('auth', 'token')
+  const onLogout = () => localStorage.removeItem('auth')
+  return (
+    <CardWrapper>
+      <Component
+        {...props}
+        isAuth={isAuth}
+        onLogin={onLogin}
+        onLogout={onLogout}
+      />
+    </CardWrapper>
+  )
+}
+
+const ComponentWithHoc = withFunctions(SimpleComponent)
 
 export default HocExercise
