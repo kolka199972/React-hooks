@@ -80,9 +80,13 @@ const SimpleComponent = ({onLogin, onLogout, isAuth}) => {
   return (
     <div>
       {!isAuth ? (
-        <button onClick={onLogin}>Войти</button>
+        <button className='btn btn-primary' onClick={onLogin}>
+          Войти
+        </button>
       ) : (
-        <button onClick={onLogout}>Выйти из системы</button>
+        <button className='btn btn-secondary' onClick={onLogout}>
+          Выйти из системы
+        </button>
       )}
     </div>
   )

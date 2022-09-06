@@ -1,6 +1,8 @@
 import React from 'react'
 import CollapseWrapper from '../common/collapse'
 import PropTypes from 'prop-types'
+import Divider from '../common/divider'
+import SmallTitle from '../common/typografy/smallTitle'
 
 const ChildrenExercise = () => {
   return (
@@ -11,6 +13,8 @@ const ChildrenExercise = () => {
         Вы можете использовать как <code>React.Children.map</code> так и{' '}
         <code>React.Children.toArray</code>
       </p>
+      <Divider />
+      <SmallTitle>Решение</SmallTitle>
 
       <ListComponents>
         <Component />
